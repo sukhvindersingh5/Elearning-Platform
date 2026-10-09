@@ -39,7 +39,6 @@ export default function Register() {
             <input
               id="register-name"
               type="text"
-              placeholder="Jane Doe"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -52,7 +51,6 @@ export default function Register() {
             <input
               id="register-email"
               type="email"
-              placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -65,7 +63,7 @@ export default function Register() {
             <input
               id="register-password"
               type="password"
-              placeholder="At least 6 characters"
+              placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               minLength={6}
