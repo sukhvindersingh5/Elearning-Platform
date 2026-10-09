@@ -20,3 +20,6 @@ Thumbs.db
 # ── Build artifacts ───────────────────────
 dist/
 build/
+
+# ── Keep local only ───────────────────────
+README.md
