@@ -89,7 +89,7 @@ Public registration only creates student accounts. Run this once to create the a
 
 ```bash
 cd backend
-node utils/seedAdmin.js "Admin" admin@elearning.com Admin@123
+node utils/seedAdmin.js "Your Name" your@email.com yourPassword
 ```
 
 ---
@@ -122,9 +122,7 @@ npm run dev
 | `http://localhost:5173/admin` | Admin dashboard *(protected)* |
 | `http://localhost:5173/student` | Student dashboard *(protected)* |
 
-**Default admin login:**
-- Email: `admin@elearning.com`
-- Password: `Admin@123`
+**Admin login** — use the credentials you set when running the `seedAdmin.js` script above.
 
 ---
 
