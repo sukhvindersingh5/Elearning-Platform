@@ -816,3 +816,344 @@ a:hover { color: #c4b5fd; }
   .footer { padding: 24px 20px; flex-direction: column; text-align: center; }
   .phases-list::before { display: none; }
 }
+
+/* ===== Login Toggle Page ===== */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.6s ease;
+}
+
+.login-page--student {
+  background: radial-gradient(ellipse 80% 70% at 30% 20%, rgba(108, 99, 255, 0.14) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 50% at 70% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 55%),
+              var(--bg-primary);
+}
+
+.login-page--admin {
+  background: radial-gradient(ellipse 80% 70% at 70% 20%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 50% at 20% 80%, rgba(239, 68, 68, 0.07) 0%, transparent 55%),
+              var(--bg-primary);
+}
+
+/* Animated blobs */
+.login-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: blobFloat 8s ease-in-out infinite;
+}
+
+.login-blob-1 {
+  width: 380px;
+  height: 380px;
+  top: -80px;
+  right: -80px;
+  animation-delay: 0s;
+}
+
+.login-blob-2 {
+  width: 280px;
+  height: 280px;
+  bottom: -60px;
+  left: -60px;
+  animation-delay: -3s;
+}
+
+.login-blob-3 {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -5s;
+}
+
+.login-page--student .login-blob-1 { background: rgba(108, 99, 255, 0.25); }
+.login-page--student .login-blob-2 { background: rgba(16, 185, 129, 0.18); }
+.login-page--student .login-blob-3 { background: rgba(167, 139, 250, 0.12); }
+
+.login-page--admin .login-blob-1 { background: rgba(245, 158, 11, 0.22); }
+.login-page--admin .login-blob-2 { background: rgba(239, 68, 68, 0.15); }
+.login-page--admin .login-blob-3 { background: rgba(251, 191, 36, 0.10); }
+
+@keyframes blobFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  33%       { transform: translateY(-20px) scale(1.04); }
+  66%       { transform: translateY(12px) scale(0.97); }
+}
+
+/* Card */
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 28px;
+  padding: 44px 40px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.45s ease both;
+}
+
+/* Role Toggle Pill */
+.role-toggle {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 99px;
+  padding: 5px;
+  margin: 20px 0 32px;
+  gap: 0;
+}
+
+.role-toggle-slider {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(50% - 5px);
+  height: calc(100% - 10px);
+  border-radius: 99px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.login-page--student .role-toggle-slider {
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.45) 0%, rgba(167, 139, 250, 0.3) 100%);
+  box-shadow: 0 2px 16px rgba(108, 99, 255, 0.35);
+  border-color: rgba(108, 99, 255, 0.4);
+}
+
+.login-page--admin .role-toggle-slider {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.45) 0%, rgba(251, 191, 36, 0.3) 100%);
+  box-shadow: 0 2px 16px rgba(245, 158, 11, 0.35);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.role-toggle-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  border-radius: 99px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.role-toggle-btn.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.role-toggle-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Login Heading animation */
+.login-heading {
+  margin-bottom: 28px;
+}
+
+.login-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  animation: titleSwitch 0.35s ease both;
+}
+
+.login-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  animation: titleSwitch 0.35s ease both;
+  animation-delay: 0.05s;
+}
+
+@keyframes titleSwitch {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Input with icon */
+.login-form .form-group {
+  margin-bottom: 16px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  z-index: 1;
+  line-height: 1;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  outline: none;
+}
+
+.input-wrapper input::placeholder { color: var(--text-muted); }
+
+.login-page--student .input-wrapper input:focus {
+  border-color: rgba(108, 99, 255, 0.6);
+  background: rgba(108, 99, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
+}
+
+.login-page--admin .input-wrapper input:focus {
+  border-color: rgba(245, 158, 11, 0.6);
+  background: rgba(245, 158, 11, 0.06);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+}
+
+/* Submit button */
+.login-submit-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: rgba(255,255,255,0.08);
+}
+
+.login-submit-btn:hover::before { opacity: 1; }
+.login-submit-btn:hover { transform: translateY(-2px); }
+.login-submit-btn:active { transform: translateY(0); }
+.login-submit-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+.login-submit-btn--student {
+  background: linear-gradient(135deg, #6c63ff 0%, #a78bfa 100%);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+}
+
+.login-submit-btn--student:hover {
+  box-shadow: 0 8px 30px rgba(108, 99, 255, 0.55);
+}
+
+.login-submit-btn--admin {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  color: #1a1000;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+}
+
+.login-submit-btn--admin:hover {
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.55);
+}
+
+/* Loading spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+.login-submit-btn--admin .spinner {
+  border-color: rgba(0,0,0,0.2);
+  border-top-color: rgba(0,0,0,0.7);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Admin mode indicator stripe */
+.login-page--admin .login-card {
+  border-color: rgba(245, 158, 11, 0.2);
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(245, 158, 11, 0.08), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.login-page--student .login-card {
+  border-color: rgba(108, 99, 255, 0.18);
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(108, 99, 255, 0.06), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Admin mode label badge */
+.login-page--admin .login-title::after {
+  content: 'RESTRICTED';
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  vertical-align: middle;
+  position: relative;
+  top: -3px;
+}
+
+@media (max-width: 480px) {
+  .login-card { padding: 32px 20px; }
+}
+

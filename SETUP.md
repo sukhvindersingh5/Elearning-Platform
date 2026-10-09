@@ -4,8 +4,7 @@
 
 A full-stack e-learning platform built with **React + Node.js + MongoDB**.
 
-- **Students** can register, log in, browse courses, take quizzes, and ask an AI Tutor questions about course material.
-- **Admins** can create and manage courses, modules, lessons, and monitor student progress.
+- **Students** can register, log in, browse courses, take quizzes, and get answers from an AI Tutor.
 - **AI Tutor** is powered by RAG (LangChain + MongoDB Vector Search + Gemini) — scoped per course.
 
 **Tech Stack:**
@@ -50,7 +49,7 @@ Create your `.env` file:
 cp .env.example .env
 ```
 
-Then open `backend/.env` and fill in:
+Then open `backend/.env` and fill in your values:
 
 ```env
 MONGO_URI=mongodb://localhost:27017/elearning
@@ -83,17 +82,6 @@ VITE_API_URL=http://localhost:5000/api
 
 ---
 
-### Step 4 — Create the Admin Account
-
-Public registration only creates student accounts. Run this once to create the admin:
-
-```bash
-cd backend
-node utils/seedAdmin.js "Your Name" your@email.com yourPassword
-```
-
----
-
 ## Running the Project
 
 Open **two terminals** and run:
@@ -118,11 +106,8 @@ npm run dev
 |---|---|
 | `http://localhost:5173/` | Home page |
 | `http://localhost:5173/register` | Student registration |
-| `http://localhost:5173/login` | Login (admin & student share this) |
-| `http://localhost:5173/admin` | Admin dashboard *(protected)* |
+| `http://localhost:5173/login` | Login |
 | `http://localhost:5173/student` | Student dashboard *(protected)* |
-
-**Admin login** — use the credentials you set when running the `seedAdmin.js` script above.
 
 ---
 
@@ -136,7 +121,7 @@ Elearning-Platform/
 │   ├── middleware/      # JWT verify + role check
 │   ├── models/          # User schema
 │   ├── routes/          # API routes
-│   ├── utils/           # Token generator, seed admin script
+│   ├── utils/           # Token generator & utilities
 │   ├── .env.example     # Environment variable template
 │   └── server.js        # Express entry point
 │
@@ -144,7 +129,7 @@ Elearning-Platform/
 │   ├── src/
 │   │   ├── components/  # Navbar, ProtectedRoute
 │   │   ├── context/     # AuthContext (global login state)
-│   │   ├── pages/       # Home, Login, Register, Admin & Student dashboards
+│   │   ├── pages/       # Home, Login, Register, dashboards
 │   │   ├── services/    # Axios API instance
 │   │   └── index.css    # Global dark theme design system
 │   ├── .env.example
@@ -160,8 +145,5 @@ Elearning-Platform/
 | Method | Endpoint | Access | Description |
 |---|---|---|---|
 | POST | `/api/auth/register` | Public | Create a student account |
-| POST | `/api/auth/login` | Public | Login (any role) |
+| POST | `/api/auth/login` | Public | Login |
 | GET | `/api/auth/me` | Private | Get current logged-in user |
-| GET | `/api/test/protected` | Private (any) | JWT test |
-| GET | `/api/test/admin-only` | Private (admin) | Role protection test |
-| GET | `/api/test/student-only` | Private (student) | Role protection test |
